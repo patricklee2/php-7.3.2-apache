@@ -4,7 +4,6 @@ LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.c
 ENV PHP_VERSION 7.3.2
 COPY apache2.conf /bin/
 COPY init_container.sh /bin/
-COPY hostingstart.html /home/site/wwwroot/hostingstart.html
 
 RUN a2enmod rewrite expires include deflate
 
@@ -134,6 +133,8 @@ ENV APACHE_RUN_USER www-data
 RUN mkdir -p /opt/startup
 COPY generateStartupCommand.sh /opt/startup/generateStartupCommand.sh
 RUN chmod 755 /opt/startup/generateStartupCommand.sh
+COPY hostingstart.html /opt/startup/hostingstart.html
+RUN chmod 755 /opt/startup/hostingstart.html
 
 ENV WEBSITE_ROLE_INSTANCE_ID localRoleInstance
 ENV WEBSITE_INSTANCE_ID localInstance
